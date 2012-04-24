@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def index
@@ -12,10 +13,18 @@ class UsersController < ApplicationController
   end
 
   def new
+    if signed_in?
+      flash[:success] = "You are already signed in."
+      redirect_to root_path
+    end
     @user = User.new
   end
 
   def create
+    if signed_in?
+      flash[:success] = "You are already signed in."
+      redirect_to root_path
+    end
     @user = User.new(params[:user])
     if @user.save
       flash[:success] = "Welcome to The Rhode Project!"
@@ -39,22 +48,20 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:sucess] = "User removed."
-    redirect_to users_path
-  end
-  private
-    def signed_in_user
-
-      #Alternate
-      #flash[:notice] = "Please sign in."
-      #redirect_to signin_path
-      unless signed_in?
-        store_location
-        redirect_to signin_path, notice: "Please sign in"
-      end
-
+    @remove =  User.find(params[:id])
+    if @remove == current_user
+      flash[:success] = "You cannot remove yourself"
+      redirect_to users_path
+    else
+      @remove.destroy  unless @remove == current_user
+      flash[:success] = "User #{@remove.name} removed."
+      redirect_to users_path
     end
+
+  end
+
+  #Private Functions
+  private
 
     def correct_user
       @user = User.find(params[:id])
