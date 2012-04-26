@@ -28,7 +28,7 @@ production:
   #adapter: sqlite3
   #database: db/development.sqlite3
   database: prod
-  adapter:  mysql
+  adapter:  activerecord-mysql-adapter
   #user: postrgres
   pool: 5
   timeout: 5000
