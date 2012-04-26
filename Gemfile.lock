@@ -97,7 +97,6 @@ GEM
     mime-types (1.18)
     multi_json (1.2.0)
     mysql (2.8.1-x86-mingw32)
-    newrelic_rpm (3.3.4.1)
     nokogiri (1.5.2-x86-mingw32)
     pg (0.12.2-x86-mingw32)
     polyglot (0.3.3)
@@ -185,7 +184,6 @@ DEPENDENCIES
   guard-rspec (= 0.5.5)
   jquery-rails (= 2.0.0)
   mysql
-  newrelic_rpm
   pg (= 0.12.2)
   rails (= 3.2.3)
   rspec-rails (= 2.9.0)
