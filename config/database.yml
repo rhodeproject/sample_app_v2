@@ -27,8 +27,8 @@ test:
 production:
   #adapter: sqlite3
   #database: db/development.sqlite3
-  database: prod-pg
-  adapter:  postgresql
+  database: prod
+  adapter:  mysql
   #user: postrgres
   pool: 5
   timeout: 5000
